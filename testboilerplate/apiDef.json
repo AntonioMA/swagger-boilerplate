@@ -1,0 +1,223 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Test Boilerplate API",
+        "description": "API to Test the Boilerplate Module.\n\nAuthorization: Some APIs are marked as requiring authorization. For those APIs, the method defined will be invoked.\n",
+        "version": "1.0.0"
+    },
+    "host": "somethingsomething.herokuapp.com",
+    "schemes": [
+        "http",
+        "https"
+    ],
+    "basePath": "/",
+    "consumes": [
+        "application/x-www-form-urlencoded",
+        "application/json"
+    ],
+    "produces": [
+        "application/json",
+        "text/html"
+    ],
+    "x-implementation-module": "./mymodules/sampleImpl.js",
+    "x-implementation-middleware": [
+        "configReady"
+    ],
+    "x-implementation-final-middleware": [
+        "errorHandler"
+    ],
+    "x-implementation-configuration": "loadConfig",
+    "securityDefinitions": {
+        "tokenAuth": {
+            "type": "apiKey",
+            "description": "Authorization based on the UUID of the requesting user",
+            "in": "header",
+            "name": "x-requester-uuid",
+            "x-implemented-in": "tokenAuth"
+        },
+        "otherAuth": {
+            "type": "apiKey",
+            "description": "Authorization based on the UUID of the requesting user",
+            "in": "header",
+            "name": "x-requester-other",
+            "x-implemented-in": "otherAuth"
+        }
+    },
+    "paths": {
+        "/some/resource/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "otherAuth": []
+                    }
+                ],
+                "summary": "Gets something awesome",
+                "x-implemented-in": "getSomeResource",
+                "description": "It does something. Or it does not. Your call.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Id of the resource to get.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Something"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Correct result",
+                        "schema": {
+                            "$ref": "#/definitions/HTML"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "otherAuth": []
+                    }
+                ],
+                "summary": "Puts something awesome",
+                "x-implemented-in": "putSomeResource",
+                "description": "It does something. Or it does not. Your call.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Id of the resource to get.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Something"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Correct result",
+                        "schema": {
+                            "$ref": "#/definitions/HTML"
+                        }
+                    }
+                }
+            }
+        },
+        "/other/resource/{id}": {
+            "get": {
+                "security": [
+                    {
+                        "otherAuth": []
+                    }
+                ],
+                "summary": "Gets something else awesome",
+                "x-implemented-in": "doAwesomeResource",
+                "description": "It does something. Or it does not. Your call.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Id of the resource to get.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Something",
+                    "CORS"
+                ],
+                "produces": [
+                    "application/JSOPN"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Correct result",
+                        "schema": {
+                            "$ref": "#/definitions/SomeResult"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "security": [
+                    {
+                        "tokenAuth": []
+                    }
+                ],
+                "summary": "Puts something awesome",
+                "x-implemented-in": "doAwesomeResource",
+                "description": "It does something. Or it does not. Your call.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "description": "Id of the resource to get.",
+                        "in": "path",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Something"
+                ],
+                "produces": [
+                    "text/html"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Correct result",
+                        "schema": {
+                            "$ref": "#/definitions/HTML"
+                        }
+                    },
+                    "500": {
+                        "description": "Something broke",
+                        "schema": {
+                            "$ref": "#/definitions/ErrorInfo"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "SomeResult": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "string"
+                },
+                "somethingElse": {
+                    "type": "string"
+                }
+            }
+        },
+        "HTML": {
+            "type": "string",
+            "description": "HTML document of the room"
+        },
+        "ErrorInfo": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                },
+                "fields": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

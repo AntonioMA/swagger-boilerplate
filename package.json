@@ -1,0 +1,19 @@
+{
+  "name": "swagger-boilerplate",
+  "version": "0.0.1",
+  "description": "Boilerplate for a server described using Swagger",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AntonioMA/swagger-boilerplate"
+  },
+  "author": "Antonio M. Amaya",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.0.0",
+    "express-session": "^1.15.2",
+    "node-getopt": "^0.2.3"
+  },
+  "devDependencies": {}
+}
