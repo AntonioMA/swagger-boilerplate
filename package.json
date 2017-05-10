@@ -1,6 +1,6 @@
 {
   "name": "swagger-boilerplate",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Boilerplate for a server described using Swagger",
   "main": "index.js",
   "repository": {
@@ -14,7 +14,8 @@
     "cors": "^2.7.1",
     "express": "^4.0.0",
     "express-session": "^1.15.2",
-    "node-getopt": "^0.2.3"
+    "node-getopt": "^0.2.3",
+    "yamljs": "^0.2.10"
   },
   "devDependencies": {}
 }
