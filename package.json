@@ -1,6 +1,6 @@
 {
   "name": "swagger-boilerplate",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Boilerplate for a server described using Swagger",
   "main": "index.js",
   "repository": {
