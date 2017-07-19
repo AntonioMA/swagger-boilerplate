@@ -19,7 +19,8 @@ var swaggerServer =
    apiDef: './apiDef.yml',
    modulePath: __dirname + '/',
    appName: 'Test Swagger Module Implementation',
-   serverPort: 8124
+   serverPort: 8124,
+   allowedCorsOrigins: 'http://sample.com,https://example.com']
  });
 
 swaggerServer.start();
@@ -53,7 +54,7 @@ Options can have the following attributes:
    * **x-implemented-in**: For any given exposed API, the method that implements it. Must conform to
      the express method definition. If the key is used on a *Security Definition*, it's the module
      (also as a express Middleware) that implements the authentication. It's up to the module
-     implementator to decide how to pass the authentication resuls to the actual methods.
+     implementator to decide how to pass the authentication results to the actual methods.
    * **x-implementation-final-middleware**: Array of last middleware on the chain (usually error
      handlers). This will be executed after the specific path method, only if the specific call
      method explicitly invoked the next method in the chain.
@@ -62,7 +63,9 @@ Options can have the following attributes:
  * **appName**: Name of the Main Module of the application (for the logs)
  * **serverPort**: Port where the server must start by default (if not overriden by a command line
     parameter or by the SERVER_PORT environment variable.
-    
+ * **allowedCorsOrigins**: Array of domains that will be added to the origin white list for CORS
+    marked APIs. Note that if this parameter is not present, '*' will be used instead!
+
 This constructor also parses the command line. It accepts the following parameters:
 
 *  -h, --help            Displays this help.
@@ -73,10 +76,10 @@ This constructor also parses the command line. It accepts the following paramete
 	* log
 	* warn
 	* error
- 
-   by default the value is "error,warn,log". 
+
+   by default the value is "error,warn,log".
 *  -p, --serverPort=ARG  Server listening port. If not present it uses either the PORT env variable or the 8123 port
-*  -u, --user=ARG        UID (name or number) to fork to after binding the port. **This only works on 
+*  -u, --user=ARG        UID (name or number) to fork to after binding the port. **This only works on
    Unix-like systems, where process.getuid is implemented.**
 *  -s, --staticPath=ARG  Directory that holds the static files. By default it's the ./web directory.
 *  -C, --certDir=ARG     Directory that holds the cert.pem and key.pem files. Only used if -S is specified also.
@@ -99,7 +102,7 @@ or nothing sorry)
 #### MultiLevelLogger
   Simple logger that allow multiple level logs. The configured level must be a bitmask of the desired
  enabled levels.
- 
+
  Usage:
  ```
 var logger = new MultiLevelLogger('Logger Name', 4); // Enable only error
@@ -167,7 +170,7 @@ It will return a new instance if:
 * The number of arguments has changed or
 * The actual arguments have changed
 
-Otherwise it returns a reference to the previously created instance. Note that it also replaces the 
+Otherwise it returns a reference to the previously created instance. Note that it also replaces the
 previous instance on the cache (so it loses that reference).
 
 
@@ -199,7 +202,7 @@ Returns true value looks like true. Or in this case, 'true', 'TRUE', any number 
 
 #### extendCopy(aSrc, aExtraElems)
 ```
-var a = { 
+var a = {
  a1: 1,
  a2: 2,
  a3: 3
@@ -213,13 +216,13 @@ Utils.extendCopy(a, b); // Returns {a1: 'foo', a2: 2, a3: 3, a4: 'bar'}
 ```
 
 Copies from aExtraElems into aSrc. Returns a new object.
-  
 
-#### ServerPersistence 
+
+#### ServerPersistence
 WIP WIP WIP
 
 This module implements all the persistence management that the server has to keep. It can be initialized with an object that specifies a set of keys (with default values) that have to be cached. Usually that can be used to retrieve the server configuration.
- 
+
 The object created will be a promise instance that will be resolved when the requested initial set of data is available. The fulfilled value of the promise will hold both the requested cached data and the methods needed to process the rest of the persistent data.
 
 ##### Constructor
@@ -228,7 +231,7 @@ The object created will be a promise instance that will be resolved when the req
  new ServerPersistence(aCachedEntries, aConnectParameters, aLogLevel, aModules, aPrefix);
 ```
 The object will use whatever is defined in aModules. PersistenceProvider (or ioredis by default) to store the persistent information.
- 
+
 ##### Methods
 The PersistenceProvider must implement a subset of the ioredis interface. Specifically:
   - Constructor
