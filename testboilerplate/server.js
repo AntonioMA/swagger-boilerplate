@@ -5,6 +5,7 @@ var swaggerServer =
    apiDef: './apiDef.yml',
    modulePath: __dirname + '/',
    appName: 'Test Swagger Module Implementation',
+   allowedCORSOrigins: process.env.ALLOWED_CORS_ORIGINS,
    serverPort: 8124
  });
 
