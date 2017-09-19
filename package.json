@@ -1,8 +1,9 @@
 {
   "name": "swagger-boilerplate",
-  "version": "0.0.14",
+  "version": "0.0.15",
   "description": "Boilerplate for a server described using Swagger",
   "main": "index.js",
+  "engines" : { "node" : ">=8.0" },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AntonioMA/swagger-boilerplate"
