@@ -50,7 +50,17 @@ Options can have the following attributes:
      definition.
    * **x-implementation-configuration**: Method that will be called *once* before starting the app,
      to allow any pre-configuration needed. It must return a promise, that will fulfill when the
-     method has finished whatever process it needs to do.
+     method has finished whatever process it needs to do. The value of the promise must/should
+     be any configuration values that you might want to use on other parts. See below.
+   * **x-multipart-options**: This module uses multer to process mutipart/form-data parameters
+     (files). This parameter defines a function that will be called to set the multer options for
+     your applications. The function receives two parameters:
+       - config: The fulfillment value of the method you declared to configure your server.
+       - multer: The multer object that will be used to process the files.
+   * **x-static-paths**: This must be a function that will receive the fulfillment value of the
+     configuration promise, and must return an array of objects with the following attributes:
+       - url: URL that the static path will be served on
+       - path: local path of the directory that will be served on that URL.
    * **x-implemented-in**: For any given exposed API, the method that implements it. Must conform to
      the express method definition. If the key is used on a *Security Definition*, it's the module
      (also as a express Middleware) that implements the authentication. It's up to the module
