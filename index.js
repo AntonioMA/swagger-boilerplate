@@ -6,7 +6,7 @@ var JSONPersistenceProvider = require('./lib/jsonPersistenceProvider');
 var Utils = require('./lib/shared/utils');
 var ErrorInfo = require('./lib/error_info');
 var App = require('./lib/app.js');
-var RestAPI = require('./lib/restAPI');
+//var RestAPI = require('./lib/restAPI');
 module.exports = {
   Server,
   JSONPersistenceProvider,
@@ -14,5 +14,5 @@ module.exports = {
   Utils,
   ErrorInfo,
   App,
-  RestAPI,
+  //RestAPI,
 };
