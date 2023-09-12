@@ -24,6 +24,10 @@ var swaggerServer =
  });
 
 swaggerServer.start();
+// Optional
+// swaggerServer.start().then((app) => {
+//   app.use(/* express middlewares */)
+// });
 
 ```
 The module exports the following objects:
